@@ -1,0 +1,8 @@
+<svg width="1355" height="881" viewBox="0 0 1355 881" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="curve" clipPathUnits="objectBoundingBox">
+      <path d="M 0.549,0.546 C 0.506,0.805 0.428,1.007 0.332,0.999 H 0.010 L 0,0 H 1 L 1,1 L 0.549,0.546 Z" />
+    </clipPath>
+  </defs>
+  <path d="M743.726 481.34C685.709 709.766 580.619 887.751 449.834 880.803H13.495L0 0H1355C931.156 16.8717 816.699 194.025 743.726 481.34Z" fill="#F8E6D1"/>
+</svg>

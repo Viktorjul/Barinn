@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Climate_Crisis, Playfair_Display, Inter } from "next/font/google";
+import Header from "@/components/Header";
 import "./globals.css";
 
 const climateCrisis = Climate_Crisis({
@@ -36,7 +37,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${climateCrisis.className} ${climateCrisis.variable} ${subtextFont.variable} ${paragraphFont.variable}`}>{children}</body>
+      <body className={`${climateCrisis.className} ${climateCrisis.variable} ${subtextFont.variable} ${paragraphFont.variable}`}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
