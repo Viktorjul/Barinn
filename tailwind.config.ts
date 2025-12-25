@@ -11,6 +11,13 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        subtext: "var(--subtext)",
+        text: "var(--text)",
+      },
+      fontFamily: {
+        custom: ["var(--font-custom)", "sans-serif"],
+        "orange-squash": ["var(--font-orange-squash)", "sans-serif"],
+        paragraph: ["var(--font-paragraph)", "sans-serif"],
       },
     },
   },

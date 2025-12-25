@@ -1,15 +1,11 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm">
-        <h1 className="text-4xl font-bold text-center mb-8">
-          Welcome to Barinn
-        </h1>
-        <p className="text-center text-lg">
-          Get started by editing{" "}
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-      </div>
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4">
+      <h1 className="text-9xl text-foreground font-custom" style={{ fontWeight: 400 }}>Barinn</h1>
+      <p className="text-subtext font-orange-squash text-4xl">BASIL GIMLET</p>
+      <p className="text-text font-paragraph text-lg max-w-2xl text-center px-4">
+        Your paragraph text here. This is where you can add descriptive content about your brand, product, or service.
+      </p>
     </main>
   );
 }
