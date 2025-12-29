@@ -2,12 +2,29 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <div className="bg-foreground rounded-2xl flex flex-col md:flex-row relative overflow-hidden" style={{ margin: '24px', minHeight: 'calc(100vh - 80px - 48px)' }}>
+    <div 
+      className="hero-container bg-foreground rounded-2xl flex flex-col md:flex-row relative overflow-hidden" 
+      style={{ 
+        margin: '8px',
+        minHeight: 'calc(100vh - 80px - 16px)'
+      }}
+    >
       {/* Left side - Text content */}
-      <div className="flex-[0.25] md:flex-[0.4] flex items-start justify-center pt-8 md:pt-16 pb-6 md:pb-12 px-8 md:px-12 relative z-10">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl text-background font-custom leading-tight" style={{ fontWeight: 400 }}>
-          Hristu upp kvöldið
-        </h1>
+      <div className="flex-[0.25] md:flex-[0.4] flex flex-col items-start justify-start pt-16 md:pt-24 pb-6 md:pb-12 px-8 md:px-12 relative z-10 gap-6">
+        <div>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl text-background font-custom leading-tight mb-2" style={{ fontWeight: 400 }}>
+            Hristu upp
+          </h1>
+          <h1 className="text-5xl md:text-6xl lg:text-7xl text-subtext font-custom leading-tight" style={{ fontWeight: 400 }}>
+            kvöldið
+          </h1>
+        </div>
+        <p className="text-lg md:text-lg text-background font-paragraph leading-relaxed max-w-md">
+          Uppskriftir, skammtareiknivél, tillögur út frá Barnum mínum og gervigreindarkokteilar úr því sem þú átt nú þegar.
+        </p>
+        <button className="bg-subtext text-white px-8 py-4 rounded-xl font-paragraph text-lg md:text-lg hover:bg-subtext/90 transition-colors">
+          Opnaðu Barinn Þinn
+        </button>
       </div>
 
       {/* Right side - Image with simple curved overlay */}
