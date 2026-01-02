@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { href: "/", label: "Heim" },
@@ -13,8 +14,18 @@ const menuItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    // Check scroll position immediately on route change
+    const checkScroll = () => {
+      const scrolled = window.scrollY > window.innerHeight * 0.8;
+      setIsScrolled(scrolled);
+    };
+
+    // Check on mount and route change
+    checkScroll();
+
     const handleScroll = () => {
       // Change header when scrolled past 80vh (after hero section)
       const scrolled = window.scrollY > window.innerHeight * 0.8;
@@ -23,7 +34,7 @@ export default function Header() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [pathname]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -41,7 +52,7 @@ export default function Header() {
         style={{
           background: isScrolled 
             ? 'var(--hero-gradient-start)' 
-            : 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%)'
+            : 'linear-gradient(to bottom, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0) 100%)'
         }}
       >
         <div className="flex items-center justify-between">
@@ -57,18 +68,21 @@ export default function Header() {
 
           {/* Navigation - Pill shaped container - Desktop only */}
           <nav className="hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-2 py-2 border border-white/20">
-            {menuItems.map((item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`px-6 py-2 rounded-full text-white transition-all text-sm ${
-                  index === 0 ? 'bg-white/20' : 'hover:bg-white/10'
-                }`}
-                style={{ fontFamily: 'var(--font-clash-regular)' }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`px-6 py-2 rounded-full text-white transition-all text-sm ${
+                    isActive ? 'bg-white/20' : 'hover:bg-white/10'
+                  }`}
+                  style={{ fontFamily: 'var(--font-clash-regular)' }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
 
           {/* Mobile menu button */}
@@ -112,20 +126,23 @@ export default function Header() {
           style={{ backgroundColor: '#ffffff' }}
         >
           <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-4xl transition-colors"
-                style={{ 
-                  color: 'var(--hero-gradient-start)',
-                  fontFamily: 'var(--font-clash-bold)'
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-4xl transition-colors ${isActive ? 'underline' : ''}`}
+                  style={{ 
+                    color: 'var(--hero-gradient-start)',
+                    fontFamily: 'var(--font-clash-bold)'
+                  }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="/login"
               onClick={() => setIsMobileMenuOpen(false)}
