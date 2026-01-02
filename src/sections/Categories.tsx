@@ -17,23 +17,41 @@ export default function Categories() {
         backgroundColor: '#ffffff'
       }}
     >
+      {/* Categories List */}
       <div className="space-y-0">
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <Link
             key={category.slug}
             href={`/cocktails/${category.slug}`}
-            className="group block border-b py-8 transition-all duration-300 hover:px-4"
-            style={{ borderColor: 'var(--hero-gradient-start)' }}
+            className="group flex items-center justify-between border-b py-6 md:py-8 transition-all duration-300 hover:pl-4"
+            style={{ 
+              borderColor: 'rgba(26, 88, 80, 0.15)',
+              borderBottomWidth: index === categories.length - 1 ? '0' : '1px'
+            }}
           >
-            <h2 
-              className="text-5xl md:text-6xl lg:text-7xl transition-colors duration-300"
+            <h3 
+              className="text-3xl md:text-5xl lg:text-6xl transition-all duration-300 group-hover:translate-x-2"
               style={{ 
                 color: 'var(--hero-gradient-start)',
                 fontFamily: 'var(--font-clash-bold)'
               }}
             >
               {category.name}
-            </h2>
+            </h3>
+            
+            {/* Arrow icon */}
+            <svg
+              className="w-6 h-6 md:w-8 md:h-8 transition-transform duration-300 group-hover:translate-x-2"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              style={{ color: 'var(--hero-gradient-start)' }}
+            >
+              <path d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         ))}
       </div>

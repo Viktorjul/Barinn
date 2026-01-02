@@ -25,6 +25,15 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <header 
@@ -39,14 +48,14 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="group">
             <h1 
-              className="text-xl md:text-3xl text-white transition-transform duration-300 group-hover:scale-105 uppercase tracking-wide"
+              className="text-2xl md:text-3xl text-white transition-transform duration-300 group-hover:scale-105 uppercase tracking-wide"
               style={{ fontFamily: 'var(--font-clash-bold)' }}
             >
               BARINN
             </h1>
           </Link>
 
-          {/* Navigation - Pill shaped container - Desktop */}
+          {/* Navigation - Pill shaped container - Desktop only */}
           <nav className="hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-2 py-2 border border-white/20">
             {menuItems.map((item, index) => (
               <Link
@@ -65,7 +74,7 @@ export default function Header() {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-white z-[60]"
             aria-label="Toggle menu"
           >
             <svg
@@ -85,7 +94,7 @@ export default function Header() {
             </svg>
           </button>
 
-          {/* Login button - Desktop */}
+          {/* Login button - Desktop only */}
           <Link 
             href="/login"
             className="hidden md:block px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors border border-white/20 text-sm backdrop-blur-sm"
@@ -96,9 +105,12 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-white md:hidden">
+        <div 
+          className="fixed inset-0 z-40 md:hidden"
+          style={{ backgroundColor: '#ffffff' }}
+        >
           <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
             {menuItems.map((item) => (
               <Link
@@ -117,7 +129,7 @@ export default function Header() {
             <Link
               href="/login"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="px-8 py-4 text-white rounded-full text-lg"
+              className="px-8 py-4 text-white rounded-full text-lg mt-4"
               style={{ 
                 backgroundColor: 'var(--hero-gradient-start)',
                 fontFamily: 'var(--font-clash-regular)'

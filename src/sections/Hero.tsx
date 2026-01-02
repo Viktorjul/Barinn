@@ -52,7 +52,7 @@ export default function Hero() {
             className="text-8xl lg:text-9xl text-white whitespace-nowrap tracking-wider"
             style={{ fontFamily: 'var(--font-clash-bold)' }}
           >
-            Hristu upp kvöldið
+            HRISTU UPP KVÖLDIÐ
           </h1>
         </div>
 
