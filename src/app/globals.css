@@ -7,6 +7,8 @@
   --foreground: #F8E6D1;
   --subtext: #FB5600;
   --text: #ffffff;
+  --hero-gradient-start: #1a5850;
+  --hero-gradient-end: #d4f0e8;
 }
 
 body {
@@ -44,12 +46,3 @@ p {
     text-wrap: balance;
   }
 }
-
-/* Responsive hero margins */
-@media (min-width: 768px) {
-  .hero-container {
-    margin: 24px !important;
-    min-height: calc(100vh - 80px - 48px) !important;
-  }
-}
-

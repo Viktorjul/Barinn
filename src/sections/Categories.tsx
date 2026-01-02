@@ -12,29 +12,30 @@ const categories = [
 export default function Categories() {
   return (
     <section 
-      className="py-12 md:py-16 px-2 md:px-6" 
+      className="py-16 md:py-24 px-8 md:px-10" 
       style={{ 
-        backgroundColor: 'var(--background)'
+        backgroundColor: '#ffffff'
       }}
     >
-      <div className="mx-auto">
-        <div className="space-y-0">
-          {categories.map((category) => (
-            <Link
-              key={category.slug}
-              href={`/cocktails/${category.slug}`}
-              className="group block border-b py-8 transition-all duration-300 hover:px-4"
-              style={{ borderColor: 'var(--foreground)' }}
+      <div className="space-y-0">
+        {categories.map((category) => (
+          <Link
+            key={category.slug}
+            href={`/cocktails/${category.slug}`}
+            className="group block border-b py-8 transition-all duration-300 hover:px-4"
+            style={{ borderColor: 'var(--hero-gradient-start)' }}
+          >
+            <h2 
+              className="text-5xl md:text-6xl lg:text-7xl transition-colors duration-300"
+              style={{ 
+                color: 'var(--hero-gradient-start)',
+                fontFamily: 'var(--font-clash-bold)'
+              }}
             >
-              <h2 
-                className="text-5xl md:text-6xl lg:text-7xl font-orange-squash transition-colors duration-300 group-hover:text-subtext"
-                style={{ color: 'var(--foreground)' }}
-              >
-                {category.name}
-              </h2>
-            </Link>
-          ))}
-        </div>
+              {category.name}
+            </h2>
+          </Link>
+        ))}
       </div>
     </section>
   );

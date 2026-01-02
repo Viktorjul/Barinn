@@ -12,58 +12,48 @@ export default function CocktailCard({ title, image, tags, slug }: CocktailCardP
   return (
     <Link
       href={`/cocktails/${slug}`}
-      className="group relative rounded-3xl overflow-hidden border-4 border-foreground transition-transform duration-300 hover:scale-[1.02]"
+      className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border"
+      style={{ 
+        backgroundColor: '#ffffff',
+        borderColor: 'rgba(26, 88, 80, 0.15)'
+      }}
     >
       {/* Image */}
-      <div className="relative aspect-[4/5]">
+      <div className="relative aspect-[4/5] overflow-hidden">
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
       {/* Content at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 flex items-end justify-between">
-        <div>
-          <h3 className="text-2xl md:text-3xl font-orange-squash text-white mb-3">
-            {title}
-          </h3>
-          <div className="flex gap-2 flex-wrap">
-            {tags.map((tag, index) => (
-              <span
-                key={index}
-                className="px-4 py-1.5 rounded-full border border-white/60 text-white text-sm font-paragraph"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Orange button */}
-        <button 
-          className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-          style={{ backgroundColor: 'var(--subtext)' }}
+      <div className="p-5">
+        <h3 
+          className="text-2xl md:text-3xl mb-3 transition-colors"
+          style={{ 
+            color: 'var(--hero-gradient-start)',
+            fontFamily: 'var(--font-clash-bold)'
+          }}
         >
-          <svg 
-            width="20" 
-            height="20" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="white" 
-            strokeWidth="2"
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          >
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-        </button>
+          {title}
+        </h3>
+        <div className="flex gap-2 flex-wrap">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="px-4 py-1.5 rounded-full text-sm"
+              style={{ 
+                backgroundColor: 'rgba(26, 88, 80, 0.1)',
+                color: 'var(--hero-gradient-start)',
+                fontFamily: 'var(--font-clash-regular)'
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       </div>
     </Link>
   );

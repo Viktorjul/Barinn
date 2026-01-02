@@ -30,10 +30,10 @@ const featuredCocktails = [
 
 export default function FeaturedCocktails() {
   return (
-    <section className="section-container relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: 'var(--background)' }}>
+    <section className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: '#ffffff' }}>
       {/* Background curved line */}
       <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none"
+        className="absolute inset-0 w-full h-full pointer-events-none opacity-10"
         viewBox="0 0 1400 900"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -41,20 +41,32 @@ export default function FeaturedCocktails() {
       >
         <path 
           d="M -200 950 Q 200 700 400 550 T 800 350 Q 1000 250 1200 150 T 1600 -50" 
-          stroke="var(--subtext)" 
+          stroke="var(--hero-gradient-start)" 
           strokeWidth="16"
           strokeLinecap="round"
           fill="none"
         />
       </svg>
 
-      <div className="relative z-10 px-2 md:px-6">
+      <div className="relative z-10 px-8 md:px-10">
         {/* Title */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-xl md:text-2xl font-paragraph mb-2" style={{ color: 'var(--subtext)' }}>
+          <p 
+            className="text-xl md:text-2xl mb-2" 
+            style={{ 
+              color: 'var(--hero-gradient-start)',
+              fontFamily: 'var(--font-clash-regular)'
+            }}
+          >
             VINSÆLIR
           </p>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-orange-squash" style={{ color: 'var(--foreground)' }}>
+          <h2 
+            className="text-5xl md:text-6xl lg:text-7xl" 
+            style={{ 
+              color: 'var(--hero-gradient-start)',
+              fontFamily: 'var(--font-clash-bold)'
+            }}
+          >
             KOKTEILAR
           </h2>
         </div>
@@ -76,7 +88,11 @@ export default function FeaturedCocktails() {
         <div className="flex justify-center">
           <Link
             href="/cocktails"
-            className="bg-subtext text-white px-8 py-4 rounded-xl font-paragraph text-lg hover:bg-subtext/90 transition-colors"
+            className="text-white px-8 py-4 rounded-xl text-lg transition-colors"
+            style={{ 
+              backgroundColor: 'var(--hero-gradient-start)',
+              fontFamily: 'var(--font-clash-regular)'
+            }}
           >
             Sjá alla kokteila
           </Link>

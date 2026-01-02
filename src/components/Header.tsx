@@ -1,86 +1,131 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const menuItems = [
-  { href: "/", label: "HEIM" },
-  { href: "/about", label: "UPPSKRIFTIR" },
-  { href: "/menu", label: "KOKTEILL 101" },
-  { href: "/contact", label: "UM BARINN" },
+  { href: "/", label: "Heim" },
+  { href: "/cocktails", label: "Kokteílar 101" },
+  { href: "/recipes", label: "Uppskriftir" },
+  { href: "/about", label: "Um Barinn" },
 ];
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Change header when scrolled past 80vh (after hero section)
+      const scrolled = window.scrollY > window.innerHeight * 0.8;
+      setIsScrolled(scrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'var(--background)' }}>
-        <div className="flex items-center justify-center px-8 py-6 md:px-12 md:py-8 relative">
+      <header 
+        className="fixed top-0 left-0 right-0 z-50 px-8 py-6 md:px-10 transition-all duration-300" 
+        style={{
+          background: isScrolled 
+            ? 'var(--hero-gradient-start)' 
+            : 'linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%)'
+        }}
+      >
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <Link href="/" className="group">
-            <h1 className="text-3xl md:text-4xl font-custom transition-transform duration-300 group-hover:scale-105" style={{ fontWeight: 400, color: 'var(--foreground)' }}>
-              Barinn
+            <h1 
+              className="text-xl md:text-3xl text-white transition-transform duration-300 group-hover:scale-105 uppercase tracking-wide"
+              style={{ fontFamily: 'var(--font-clash-bold)' }}
+            >
+              BARINN
             </h1>
           </Link>
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="absolute right-8 md:right-12 w-12 h-12 flex items-center justify-center z-[101]"
+
+          {/* Navigation - Pill shaped container - Desktop */}
+          <nav className="hidden md:flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-2 py-2 border border-white/20">
+            {menuItems.map((item, index) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`px-6 py-2 rounded-full text-white transition-all text-sm ${
+                  index === 0 ? 'bg-white/20' : 'hover:bg-white/10'
+                }`}
+                style={{ fontFamily: 'var(--font-clash-regular)' }}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 text-white"
             aria-label="Toggle menu"
           >
-            {!isOpen ? (
-              <div className="grid grid-cols-2 gap-1.5 w-7 h-7">
-                <div className="rounded-sm" style={{ backgroundColor: 'var(--foreground)' }}></div>
-                <div className="rounded-sm" style={{ backgroundColor: 'var(--foreground)' }}></div>
-                <div className="rounded-sm" style={{ backgroundColor: 'var(--foreground)' }}></div>
-                <div className="rounded-sm" style={{ backgroundColor: 'var(--foreground)' }}></div>
-              </div>
-            ) : (
-              <div className="relative w-7 h-7">
-                <div 
-                  className="absolute top-1/2 left-0 w-full h-0.5 rounded-sm"
-                  style={{ 
-                    backgroundColor: 'var(--background)',
-                    transform: 'rotate(45deg) translateY(-50%)'
-                  }}
-                />
-                <div 
-                  className="absolute top-1/2 left-0 w-full h-0.5 rounded-sm"
-                  style={{ 
-                    backgroundColor: 'var(--background)',
-                    transform: 'rotate(-45deg) translateY(-50%)'
-                  }}
-                />
-              </div>
-            )}
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
           </button>
+
+          {/* Login button - Desktop */}
+          <Link 
+            href="/login"
+            className="hidden md:block px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full transition-colors border border-white/20 text-sm backdrop-blur-sm"
+            style={{ fontFamily: 'var(--font-clash-regular)' }}
+          >
+            Innskráning
+          </Link>
         </div>
       </header>
 
-      {/* Full screen menu */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center"
-          style={{ backgroundColor: 'var(--foreground)' }}
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setIsOpen(false);
-            }
-          }}
-        >
-          <nav className="w-full max-w-4xl px-8 space-y-8 md:space-y-12" onClick={(e) => e.stopPropagation()}>
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-white md:hidden">
+          <div className="flex flex-col items-center justify-center h-full space-y-8 px-8">
             {menuItems.map((item) => (
-              <div key={item.href} className="overflow-hidden">
-                <Link
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block text-4xl md:text-6xl lg:text-7xl font-orange-squash font-semibold transition-all duration-300 hover:text-subtext hover:translate-x-4 origin-left"
-                  style={{ color: 'var(--background)' }}
-                >
-                  {item.label}
-                </Link>
-              </div>
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-4xl transition-colors"
+                style={{ 
+                  color: 'var(--hero-gradient-start)',
+                  fontFamily: 'var(--font-clash-bold)'
+                }}
+              >
+                {item.label}
+              </Link>
             ))}
-          </nav>
+            <Link
+              href="/login"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-8 py-4 text-white rounded-full text-lg"
+              style={{ 
+                backgroundColor: 'var(--hero-gradient-start)',
+                fontFamily: 'var(--font-clash-regular)'
+              }}
+            >
+              Innskráning
+            </Link>
+          </div>
         </div>
       )}
     </>

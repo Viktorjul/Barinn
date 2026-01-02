@@ -3,55 +3,78 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <div 
-      className="hero-container bg-foreground rounded-2xl flex flex-col md:flex-row relative overflow-hidden" 
+      className="relative overflow-hidden -mt-[80px] pt-[80px]" 
       style={{ 
-        margin: '8px',
-        minHeight: 'calc(100vh - 80px - 16px)'
+        minHeight: '100vh',
+        background: 'linear-gradient(to bottom, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%)',
       }}
     >
-      {/* Left side - Text content */}
-      <div className="flex-[0.25] md:flex-[0.4] flex flex-col items-start justify-start pt-16 md:pt-24 pb-6 md:pb-12 px-8 md:px-12 relative z-10 gap-6">
-        <div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl text-background font-custom leading-tight mb-2" style={{ fontWeight: 400 }}>
-            Hristu upp
-          </h1>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl text-subtext font-custom leading-tight" style={{ fontWeight: 400 }}>
-            kvöldið
-          </h1>
-        </div>
-        <p className="text-lg md:text-lg text-background font-paragraph leading-relaxed max-w-md">
-          Uppskriftir, skammtareiknivél, tillögur út frá Barnum mínum og gervigreindarkokteilar úr því sem þú átt nú þegar.
-        </p>
-        <button className="bg-subtext text-white px-8 py-4 rounded-xl font-paragraph text-lg md:text-lg hover:bg-subtext/90 transition-colors">
-          Opnaðu Barinn Þinn
-        </button>
-      </div>
-
-      {/* Right side - Image with simple curved overlay */}
-      <div className="flex-[0.75] md:flex-[0.6] relative overflow-hidden md:rounded-r-2xl">
+      {/* Background blur image */}
+      <div className="absolute inset-0 opacity-30">
         <Image
-          src="/images/hero.jpg"
-          alt="Cocktail glasses"
+          src="/images/Background.png"
+          alt="Background"
           fill
           className="object-cover"
           priority
         />
-        {/* Simple curved overlay - mobile: from top (downward), desktop: from left */}
-        <div 
-          className="md:hidden absolute top-0 left-0 right-0 h-1/3 bg-foreground"
-          style={{
-            clipPath: 'ellipse(70% 100% at 50% 0%)',
-            WebkitClipPath: 'ellipse(70% 100% at 50% 0%)',
-          }}
-        />
-        <div 
-          className="hidden md:block absolute left-0 top-0 bottom-0 w-1/4 bg-foreground"
-          style={{
-            clipPath: 'ellipse(100% 70% at 0% 50%)',
-            WebkitClipPath: 'ellipse(100% 70% at 0% 50%)'
-          }}
-        />
       </div>
+
+      {/* Mobile Layout */}
+      <div className="md:hidden relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-20">
+        {/* Title on top */}
+        <div className="text-center mb-8">
+          <h1 
+            className="text-5xl sm:text-6xl text-white tracking-wide leading-tight"
+            style={{ fontFamily: 'var(--font-clash-bold)' }}
+          >
+            HRISTU UPP<br/>KVÖLDIÐ
+          </h1>
+        </div>
+        
+        {/* Cocktail image below */}
+        <div className="relative w-full max-w-md h-[450px] sm:h-[550px]">
+          <Image
+            src="/images/Drink-background.png"
+            alt="Green cocktail"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:flex relative z-10 items-center justify-center w-full px-10 min-h-screen">
+        {/* Centered title */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center w-full px-4">
+          <h1 
+            className="text-8xl lg:text-9xl text-white whitespace-nowrap tracking-wider"
+            style={{ fontFamily: 'var(--font-clash-bold)' }}
+          >
+            Hristu upp kvöldið
+          </h1>
+        </div>
+
+        {/* Cocktail image */}
+        <div className="relative w-full max-w-2xl h-[700px] lg:h-[800px]">
+          <Image
+            src="/images/Drink-background.png"
+            alt="Green cocktail"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* White gradient overlay at bottom - fades upward */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-64 md:h-80 pointer-events-none z-30"
+        style={{
+          background: 'linear-gradient(to top, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 100%)'
+        }}
+      />
     </div>
   );
 }

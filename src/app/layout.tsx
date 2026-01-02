@@ -1,26 +1,17 @@
 import type { Metadata } from "next";
-import { Climate_Crisis, Playfair_Display, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Header from "@/components/Header";
 import "./globals.css";
 
-const climateCrisis = Climate_Crisis({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-custom",
+const clashDisplayBold = localFont({
+  src: "./fonts/ClashDisplay-Bold.otf",
+  variable: "--font-clash-bold",
   display: "swap",
 });
 
-const subtextFont = Playfair_Display({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-orange-squash",
-  display: "swap",
-});
-
-const paragraphFont = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-paragraph",
+const clashDisplayRegular = localFont({
+  src: "./fonts/ClashDisplay-Regular.otf",
+  variable: "--font-clash-regular",
   display: "swap",
 });
 
@@ -37,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${climateCrisis.className} ${climateCrisis.variable} ${subtextFont.variable} ${paragraphFont.variable}`}>
+      <body className={`${clashDisplayBold.variable} ${clashDisplayRegular.variable}`}>
         <Header />
         {children}
       </body>
