@@ -12,13 +12,13 @@ const categories = [
 export default function Categories() {
   return (
     <section 
-      className="py-16 md:py-24 px-8 md:px-10" 
+      className="relative py-16 md:py-24 px-8 md:px-10" 
       style={{ 
-        backgroundColor: '#ffffff'
+        backgroundColor: 'rgba(255, 255, 255, 0.9)'
       }}
     >
       {/* Categories List */}
-      <div className="space-y-0">
+      <div className="space-y-0 relative z-10">
         {categories.map((category, index) => (
           <Link
             key={category.slug}

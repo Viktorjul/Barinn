@@ -30,23 +30,8 @@ const featuredCocktails = [
 
 export default function FeaturedCocktails() {
   return (
-    <section className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: '#ffffff' }}>
+    <section className="relative py-16 md:py-24 overflow-hidden" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
       {/* Background curved line */}
-      <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none opacity-10"
-        viewBox="0 0 1400 900"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <path 
-          d="M -200 950 Q 200 700 400 550 T 800 350 Q 1000 250 1200 150 T 1600 -50" 
-          stroke="var(--hero-gradient-start)" 
-          strokeWidth="16"
-          strokeLinecap="round"
-          fill="none"
-        />
-      </svg>
 
       <div className="relative z-10 px-8 md:px-10">
         {/* Title */}
