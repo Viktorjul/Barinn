@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/Header";
+import SmoothScroll from "@/components/SmoothScroll";
 import "./globals.css";
 
 const clashDisplayBold = localFont({
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${clashDisplayBold.variable} ${clashDisplayRegular.variable}`}>
+        <SmoothScroll />
         <Header />
         {children}
       </body>
